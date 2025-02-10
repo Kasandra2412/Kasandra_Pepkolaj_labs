@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://wgwtuokqjiqm"]
+
+[ext_resource type="Texture2D" uid="uid://bdrnv1hxi2kfm" path="res://pictures/Background .jpeg" id="1_mke5p"]
+[ext_resource type="PackedScene" uid="uid://bx31dxkkmuuuo" path="res://character.tscn" id="2_7op4y"]
+[ext_resource type="PackedScene" uid="uid://cvyrk05vbtig4" path="res://trees and rocks.tscn" id="3_3ielu"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(453, 340)
+scale = Vector2(4.4745, 4.60991)
+texture = ExtResource("1_mke5p")
+
+[node name="Node2D" parent="." instance=ExtResource("2_7op4y")]
+position = Vector2(-30, -99)
+
+[node name="Node2D2" parent="." instance=ExtResource("3_3ielu")]
+position = Vector2(-52, -90)

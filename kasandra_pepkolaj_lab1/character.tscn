@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://bx31dxkkmuuuo"]
+
+[ext_resource type="Texture2D" uid="uid://bp82hwquqcfya" path="res://Illustration2 char.png" id="1_7ytmc"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_w1mmn"]
+load_path = "res://.godot/imported/Illustration2.png-63eed93060b5421c3d6fe52284e748e4.ctex"
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Character" type="Sprite2D" parent="."]
+position = Vector2(777, 640)
+scale = Vector2(0.868, 0.776)
+texture = SubResource("CompressedTexture2D_w1mmn")
+
+[node name="Illustration2Char" type="Sprite2D" parent="."]
+position = Vector2(118, 581)
+scale = Vector2(0.937023, 0.905022)
+texture = ExtResource("1_7ytmc")

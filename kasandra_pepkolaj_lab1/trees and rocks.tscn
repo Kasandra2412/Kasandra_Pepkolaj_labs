@@ -1,0 +1,42 @@
+[gd_scene load_steps=4 format=3 uid="uid://cvyrk05vbtig4"]
+
+[ext_resource type="Texture2D" uid="uid://ddi6iqvumhw3f" path="res://Tree.png" id="1_7ft3f"]
+[ext_resource type="Texture2D" uid="uid://rjwjo83qps7e" path="res://rock 1.png" id="2_6it6u"]
+[ext_resource type="Texture2D" uid="uid://mpcvfh3qo6jj" path="res://rock 2.png" id="3_udj1r"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Tree" type="Sprite2D" parent="."]
+position = Vector2(554, 524)
+scale = Vector2(1.49691, 1.41667)
+texture = ExtResource("1_7ft3f")
+
+[node name="Tree2" type="Sprite2D" parent="."]
+position = Vector2(407, 489)
+scale = Vector2(1.89198, 1.70811)
+texture = ExtResource("1_7ft3f")
+
+[node name="Tree3" type="Sprite2D" parent="."]
+position = Vector2(290, 506)
+scale = Vector2(1.69907, 1.59019)
+texture = ExtResource("1_7ft3f")
+
+[node name="Tree4" type="Sprite2D" parent="."]
+position = Vector2(492, 556)
+scale = Vector2(1.10031, 1.10918)
+texture = ExtResource("1_7ft3f")
+
+[node name="Rock1" type="Sprite2D" parent="."]
+position = Vector2(446, 696)
+scale = Vector2(0.622, 0.708)
+texture = ExtResource("2_6it6u")
+
+[node name="Rock2" type="Sprite2D" parent="."]
+position = Vector2(187, 651)
+scale = Vector2(0.886, 0.793)
+texture = ExtResource("3_udj1r")
+
+[node name="Rock3" type="Sprite2D" parent="."]
+position = Vector2(618, 668)
+scale = Vector2(0.457, 0.432)
+texture = ExtResource("2_6it6u")
