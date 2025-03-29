@@ -1,0 +1,106 @@
+[gd_scene load_steps=7 format=3 uid="uid://cdchh2rpyly3g"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_fww0l"]
+sky_top_color = Color(0.136231, 0.468819, 0.661033, 1)
+sky_horizon_color = Color(0.737815, 0.829419, 0.815147, 1)
+ground_horizon_color = Color(0.737815, 0.829419, 0.815147, 1)
+
+[sub_resource type="Sky" id="Sky_m8bx5"]
+sky_material = SubResource("ProceduralSkyMaterial_fww0l")
+
+[sub_resource type="Environment" id="Environment_wgehl"]
+background_mode = 1
+background_color = Color(0.0941176, 0, 0, 1)
+sky = SubResource("Sky_m8bx5")
+ambient_light_color = Color(0.756624, 0.631776, 0.796883, 1)
+tonemap_mode = 2
+
+[sub_resource type="GDScript" id="GDScript_fww0l"]
+script/source = "extends CharacterBody3D
+
+
+const SPEED = 5.0
+const JUMP_VELOCITY = 8
+
+
+func _physics_process(delta: float) -> void:
+	# Add the gravity.
+	if not is_on_floor():
+		velocity += get_gravity() * delta
+
+	# Handle jump.
+	if Input.is_action_just_pressed(\"ui_accept\") and is_on_floor():
+		velocity.y = JUMP_VELOCITY
+
+	# Get the input direction and handle the movement/deceleration.
+	# As good practice, you should replace UI actions with custom gameplay actions.
+	var input_dir := Input.get_vector(\"ui_left\", \"ui_right\", \"ui_up\", \"ui_down\")
+	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	if direction:
+		velocity.x = direction.x * SPEED
+		velocity.z = direction.z * SPEED
+	else:
+		velocity.x = move_toward(velocity.x, 0, SPEED)
+		velocity.z = move_toward(velocity.z, 0, SPEED)
+
+	move_and_slide()
+"
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_m8bx5"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_wgehl"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 6.02064, 15.6138, 25.0778)
+light_color = Color(0.999042, 0.860219, 0.608899, 1)
+light_energy = 6.414
+spot_range = 28.7783
+spot_angle = 44.9176
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 4.837, 20.949, 32.8971)
+fov = 64.8863
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_wgehl")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.993171, 0.116671, 5.09984e-09, 0, -4.37114e-08, 1, 0.116671, 0.993171, 4.34129e-08, 0.0228813, 2.48588, -0.390511)
+light_color = Color(0.816676, 0.267374, 0.443778, 1)
+light_energy = 0.515
+shadow_enabled = true
+
+[node name="Floor" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0976948, -0.155073, -1.57184)
+use_collision = true
+size = Vector3(100, 0.076, 100)
+
+[node name="obstacle" type="CSGCylinder3D" parent="."]
+transform = Transform3D(-0.999962, -3.85803e-15, 0.00872645, 3.7381e-15, -1, -1.06581e-14, 0.00872645, -1.06581e-14, 0.999962, -7.2292, 3.14469, -13.3172)
+use_collision = true
+radius = 5.11719
+height = 6.67662
+
+[node name="obstacle1" type="CSGBox3D" parent="."]
+transform = Transform3D(-0.999962, -0.00872645, -3.81449e-10, 3.82137e-15, 4.37114e-08, -1, 0.00872645, -0.999962, -4.37097e-08, 1.66119, 0.565443, 6.14306)
+use_collision = true
+size = Vector3(24.7442, 6.00879, 1.30712)
+
+[node name="obstacle2" type="CSGBox3D" parent="."]
+transform = Transform3D(-0.999962, 0.00872662, -3.81449e-10, 3.82137e-15, 4.37114e-08, 1, 0.00872662, 0.999962, -4.37097e-08, 2.25375, 1.53391, -1.5109)
+use_collision = true
+size = Vector3(26.7139, 6.85175, 3.8049)
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0236797, 1.90735e-06, -0.0248814)
+script = SubResource("GDScript_fww0l")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 4.83403, 2.59388, 18.6162)
+shape = SubResource("CapsuleShape3D_m8bx5")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D"]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 4.83403, 2.59388, 18.6162)
+mesh = SubResource("CapsuleMesh_wgehl")
